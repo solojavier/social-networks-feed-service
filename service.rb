@@ -2,19 +2,19 @@ require 'sinatra'
 require 'json'
 require "supermodel"
 
-class Test < SuperModel::Base
+class Resource < SuperModel::Base
 end
 
-get '/objects' do
-  Test.all.to_json
+get '/resources' do
+  Resource.all.to_json
 end
 
-get '/objects/:id' do
   Test.find(params[:id].to_i).to_json
+get '/resources/:id' do
+    Resource.find(params[:id].to_i).to_json
 end
 
-post '/objects' do
-  Test.create(name: 'test').to_json
+post '/resources' do
 end
 
 get '/' do
