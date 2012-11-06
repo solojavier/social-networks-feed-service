@@ -21,12 +21,7 @@ post '/resources' do
   return 422 if params.has_key?('invalid_attribute')
 
   resource = Resource.new(params)
-
-  if resource.save
-    resource.to_json
-  else
-    500
-  end
+  resource.save ? resource.to_json : 500
 end
 
 get '/' do
