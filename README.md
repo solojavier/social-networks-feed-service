@@ -25,3 +25,10 @@ To actually run the service use this command:
 * "ruby service.rb"
 
 Go to "http://localhost:4567" and have fun
+
+# References
+
+* Rest-Client : https://github.com/archiloque/rest-client
+* Twitter gem : https://github.com/sferik/twitter
+* Sinatra     : http://www.sinatrarb.com/
+* Jquery      : http://jquery.com/
