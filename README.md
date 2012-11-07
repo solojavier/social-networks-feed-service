@@ -1,5 +1,7 @@
-# Ruby Rest Introduction Excercise
+# Social Networks Service
 
-This excercise attemps to introduce you into ruby world and rest services.
-The goal is that you create your own web service and and a client for it.
-You wil find an example, but you can create your own and create a pull request to add it.
+This lets you post to both your facebook and twitter and gives you a feed of both services in the same place
+
+This is pretty basic and is intended for the purpose of teaching a ruby example in an introductory course
+
+To be improved in time... you can colaborate via pull requests.
