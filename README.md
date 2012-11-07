@@ -10,18 +10,18 @@ If you want to collaborate please send a pull request.
 
 # How to make it work
 
-# You need to update authentication values for facebook and twitter:
+You need to update authentication values for facebook and twitter:
 
 * Facebook : https://developers.facebook.com/tools/explorer
 * Twitter  : https://dev.twitter.com/apps/new
 
-# You need to setup the enviroment by running the following commands in root of the project from Terminal
+You need to setup the enviroment by running the following commands in root of the project from Terminal
 
 * "gem install bundler"
 * "bundle install"
 
-# To actually run the service use this command:
+To actually run the service use this command:
 
 * "ruby service.rb"
 
-# Go to "http://localhost:4567" and have fun
+Go to "http://localhost:4567" and have fun
