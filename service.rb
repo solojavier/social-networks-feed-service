@@ -44,5 +44,5 @@ post '/feed' do
 end
 
 get '/' do
-  {'message' => "Social Network  service running"}.to_json
+  erb :index
 end
