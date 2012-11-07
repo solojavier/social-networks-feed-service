@@ -2,7 +2,6 @@ require 'sinatra'
 require 'json'
 require 'twitter'
 require 'rest-client'
-require 'koala'
 
 # Fill with correct values
 TWITTER_CONSUMER_KEY       = ''
@@ -12,7 +11,7 @@ TWITTER_OAUTH_TOKEN_SECRET = ''
 FACEBOOK_TOKEN             = ''
 
 FACEBOOK_HOME_URL = "https://graph.facebook.com/me/home?access_token=#{FACEBOOK_TOKEN}"
-FACEBOOK_GRAPH    = Koala::Facebook::API.new FACEBOOK_TOKEN
+FACEBOOK_POST_URL = "https://graph.facebook.com/me/feed?access_token=#{FACEBOOK_TOKEN}"
 
 Twitter.configure do |config|
   config.consumer_key       = TWITTER_CONSUMER_KEY
@@ -37,7 +36,7 @@ get '/feed' do
 end
 
 post '/feed' do
-  FACEBOOK_GRAPH.put_connections("me", "feed", :message => params[:message])
+  RestClient.post FACEBOOK_POST_URL, {message: params[:message]}
   Twitter.update(params[:message])
 
   {message: params[:message]}.to_json
