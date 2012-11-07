@@ -1,0 +1,46 @@
+<html>                                                                  
+  <head>                                                                  
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>          
+    <script type="text/javascript">                                         
+      $(document).ready(function() {
+
+         $.ajax({
+            url: 'http://localhost:4567/feed',
+            success:function(data){
+                data_json = $.parseJSON(data)
+                $.each(data_json.facebook_feed, function(index, value) { 
+                    $("#facebook-feed").append("<li>" + value + "</li>");
+                });
+              
+                $.each(data_json.twitter_feed, function(index, value) { 
+                    $("#twitter-feed").append("<li>" + value + "</li>");
+                });
+            }
+         });
+
+         $("#send").click(function() {
+           var message = $("#post-message").val();
+           $.ajax({
+                url: 'http://localhost:4567/feed',
+                type: "POST",
+                data: {message: message},
+                success:function(data){
+                  $("#result").html(data);
+                }
+            });
+         });
+
+      });
+    </script>                                                               
+  </head>                                                                 
+  <body>      
+    <h3>Make a new post</h3>
+    <input type="text" id="post-message">
+    <button id="send">Send</button>
+    <div id="result"></div>
+    <h1>Facebook Feed</h1>
+    <div id="facebook-feed"></div>
+    <h1>Twitter Feed</h1>
+    <div id="twitter-feed"></div>
+  </body>                                                                 
+</html>
