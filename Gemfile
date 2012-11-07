@@ -1,4 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'sinatra'
-gem 'supermodel'
+gem 'twitter'
+gem 'rest-client'
+gem 'koala'
