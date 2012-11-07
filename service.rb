@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'sinatra'
 require 'json'
 require 'twitter'
@@ -28,20 +29,20 @@ get '/feed' do
     "#{d["message"]} | by #{d["from"]["name"]}" 
   end
 
-  twitter_feed = Twitter.home_timeline(count: 10).map do |t| 
+  twitter_feed = Twitter.home_timeline('count' => 10).map do |t| 
     "#{t.text} | by #{t.user.name}"
   end
 
-  {facebook_feed: facebook_feed, twitter_feed: twitter_feed}.to_json
+  {'facebook_feed' => facebook_feed, 'twitter_feed' => twitter_feed}.to_json
 end
 
 post '/feed' do
-  RestClient.post FACEBOOK_POST_URL, {message: params[:message]}
+  RestClient.post FACEBOOK_POST_URL, {'message' => params[:message]}
   Twitter.update(params[:message])
 
-  {message: params[:message]}.to_json
+  {'message' => params[:message]}.to_json
 end
 
 get '/' do
-  {message: "Social Network  service running"}.to_json
+  {'message' => "Social Network  service running"}.to_json
 end
