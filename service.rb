@@ -17,8 +17,8 @@ Twitter.configure do |config|
 end
 
 get '/feed' do
-  response        = RestClient.get FACEBOOK_HOME_URL
-  parsed_response = JSON.parse(response.body)
+  raw_response        = RestClient.get FACEBOOK_HOME_URL
+  response = JSON.parse(raw_response.body)
   
   facebook_feed   = response["data"].map do |data|
     "#{data["message"]} | by #{data["from"]["name"]}" 
