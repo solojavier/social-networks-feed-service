@@ -4,12 +4,7 @@ require 'json'
 require 'twitter'
 require 'rest-client'
 
-# Fill with correct values
-TWITTER_CONSUMER_KEY       = ''
-TWITTER_CONSUMER_SECRET    = ''
-TWITTER_OAUTH_TOKEN        = ''
-TWITTER_OAUTH_TOKEN_SECRET = ''
-FACEBOOK_TOKEN             = ''
+require_relative 'config'
 
 FACEBOOK_HOME_URL = "https://graph.facebook.com/me/home?access_token=#{FACEBOOK_TOKEN}"
 FACEBOOK_POST_URL = "https://graph.facebook.com/me/feed?access_token=#{FACEBOOK_TOKEN}"
