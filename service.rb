@@ -20,12 +20,12 @@ get '/feed' do
   response        = RestClient.get FACEBOOK_HOME_URL
   parsed_response = JSON.parse(response.body)
   
-  facebook_feed   = parsed_response["data"].map do |d|
-    "#{d["message"]} | by #{d["from"]["name"]}" 
+  facebook_feed   = response["data"].map do |data|
+    "#{data["message"]} | by #{data["from"]["name"]}" 
   end
 
-  twitter_feed = Twitter.home_timeline('count' => 10).map do |t| 
-    "#{t.text} | by #{t.user.name}"
+  twitter_feed = Twitter.home_timeline('count' => 10).map do |tweet| 
+    "#{tweet.text} | by #{tweet.user.name}"
   end
 
   {'facebook_feed' => facebook_feed, 'twitter_feed' => twitter_feed}.to_json
