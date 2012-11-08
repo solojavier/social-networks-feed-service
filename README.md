@@ -44,6 +44,7 @@ If you want to improve your skills and learn more about Ruby, implement one of t
 * Remove hardcoded values in Parser class (TWITTER_LINK, TWITTER_USER, USER_AVATAR...)
 * Add logic so you can select in which social network you want to post a message
 * Implement a service to configure authentication programatically
+* Order posts by date (when mixed both streams)
 * Add the ability to have only one social network working, depending on what configuration values you setup
 * Improve the project by doing some tests, writting or correcting documentation or a brand new feature
 
