@@ -5,6 +5,7 @@ require 'twitter'
 require 'rest-client'
 
 require_relative 'config'
+require_relative 'parser'
 
 FACEBOOK_HOME_URL = "https://graph.facebook.com/me/home?access_token=#{FACEBOOK_TOKEN}"
 FACEBOOK_POST_URL = "https://graph.facebook.com/me/feed?access_token=#{FACEBOOK_TOKEN}"
@@ -17,18 +18,19 @@ Twitter.configure do |config|
 end
 
 get '/feed' do
-  raw_response        = RestClient.get FACEBOOK_HOME_URL
-  response = JSON.parse(raw_response.body)
-  
-  facebook_feed   = response["data"].map do |data|
-    "#{data["message"]} | by #{data["from"]["name"]}" 
+  items = []
+  raw_response = RestClient.get FACEBOOK_HOME_URL
+  response     = JSON.parse(raw_response.body)
+
+  response["data"].each do |data|
+    items << {item: Parser.create_facebook_item(data)} 
   end
 
-  twitter_feed = Twitter.home_timeline('count' => 10).map do |tweet| 
-    "#{tweet.text} | by #{tweet.user.name}"
+  Twitter.home_timeline('count' => 10).each do |tweet| 
+    items << {item: Parser.create_twitter_item(tweet)}
   end
 
-  {'facebook_feed' => facebook_feed, 'twitter_feed' => twitter_feed}.to_json
+  items.to_json
 end
 
 post '/feed' do
