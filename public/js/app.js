@@ -151,7 +151,7 @@ SocialFeedView.prototype.postStatus = function(e) {
     this.items.post({
         message: $('#message').val(),
         success: function(data) {
-            that.appendItem(data);
+            that.prependItem([data]);
             that.clearInput();
         }
     });
