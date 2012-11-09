@@ -10,20 +10,60 @@
   </head>
   
   <body>
-    <h3>Make a new post</h3>
-    <textarea cols="40" rows="4"></textarea>
-    <button id="send">Send</button>
+    <!--
+      This is the form to post a new status.
+      "post[message]"" will contain the actual status,
+      while everything else is a hidden input.
+    -->
+    <form action="/feed" id="new_post"> 
+      <textarea cols="40" rows="2" placeholder="Whatcha thinking?" name="post[message]" id="message" maxlength="140"></textarea>
+      <button id="send">Post to facebook & Twitter</button>
+    </form>
 
-    <div id="result"></div>
+    <!--
+      Below you'll find the actual feed, which is
+      nothing more than a list of items. It'll be
+      inside ol#news_list that we'll store every item.
+    -->
+    <section id="network_feed" class="loading">
+      <h1>Your network Feed</h1>
+      <ol id="news_list">
+      </ol>
+    </section>
 
-    <h1>Facebook Feed</h1>
-    <div id="facebook-feed"></div>
+    <!--
+      This code below is our JavaScript template for every
+      single item we'll display on our feed. It is processed
+      by icanhaz.js.
+    -->
+    <script id="item" type="text/html">
+      <li class="item">
+        <article class="{{network}}">
+          <div class="avatar" style="background-image: {{user.avatar}}"></div>
+          <header>
+            <a class="user" href="{{user.url}}" rel="external">
+              <strong>{{user.name}}</strong>
+            </a>
+          </header>
 
-    <h1>Twitter Feed</h1>
-    <div id="twitter-feed"></div>
+          <div class="content">
+            {{message.text}}
+          </div>
 
-    <!-- Adding Scripts -->
+          <footer>
+            <a href="{{message.permalink}}">Posted on {{message.datetime}}</a>
+          </footer>
+        </article>
+      </li>
+    </script>
+
+    <!--
+      Adding Scripts. Addin jQuery from Google CDN
+      and icanhaz.js from Github for faster loading,
+      while all our custom scripts are stored in js/app.js
+    -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//github.com/andyet/ICanHaz.js/raw/master/ICanHaz.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>
