@@ -39,15 +39,17 @@
     <script id="item" type="text/html">
       <li class="item">
         <article class="{{network}}">
-          <div class="avatar" style="background-image: {{user.avatar}}"></div>
-          <header>
-            <a class="user" href="{{user.url}}" rel="external">
-              <strong>{{user.name}}</strong>
-            </a>
-          </header>
+          <div class="avatar" style="background-image: url('{{user.avatar}}')"></div>
+          <div class="content_wrapper">
+            <header>
+              <a class="user" href="{{user.url}}" rel="external">
+                <strong>{{user.name}}</strong>
+              </a>
+            </header>
 
-          <div class="content">
-            {{message.text}}
+            <div class="content">
+              {{message.text}}
+            </div>
           </div>
 
           <footer>

@@ -30,6 +30,7 @@ SocialFeed.prototype.loadJSON = function(options) {
 
         /* If we get a hold of the JSON data, we call SocialFeed.loadItem */
         success: function(data) {
+            console.log(data);
             that.parseItems(data, options);
         },
 
