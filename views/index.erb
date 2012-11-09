@@ -1,46 +1,71 @@
-<html>                                                                  
-  <head>                                                                  
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>          
-    <script type="text/javascript">                                         
-      $(document).ready(function() {
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Social Network Feed Service</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Raleway:100' rel='stylesheet' type='text/css' />
 
-         $.ajax({
-            url: 'http://localhost:4567/feed',
-            success:function(data){
-                data_json = $.parseJSON(data)
-                $.each(data_json.facebook_feed, function(index, value) { 
-                    $("#facebook-feed").append("<li>" + value + "</li>");
-                });
-              
-                $.each(data_json.twitter_feed, function(index, value) { 
-                    $("#twitter-feed").append("<li>" + value + "</li>");
-                });
-            }
-         });
+    <meta charset="utf-8" />
+  </head>
+  
+  <body>
+    <!--
+      This is the form to post a new status.
+      "post[message]"" will contain the actual status,
+      while everything else is a hidden input.
+    -->
+    <form action="/feed" id="new_post"> 
+      <textarea cols="40" rows="2" placeholder="Whatcha thinking?" name="post[message]" id="message" maxlength="140"></textarea>
+      <button id="send">Post to facebook & Twitter</button>
+    </form>
 
-         $("#send").click(function() {
-           var message = $("#post-message").val();
-           $.ajax({
-                url: 'http://localhost:4567/feed',
-                type: "POST",
-                data: {message: message},
-                success:function(data){
-                  $("#result").html(data);
-                }
-            });
-         });
+    <!--
+      Below you'll find the actual feed, which is
+      nothing more than a list of items. It'll be
+      inside ol#news_list that we'll store every item.
+    -->
+    <section id="network_feed" class="loading">
+      <h1>Your network Feed</h1>
+      <ol id="news_list">
+      </ol>
+    </section>
 
-      });
-    </script>                                                               
-  </head>                                                                 
-  <body>      
-    <h3>Make a new post</h3>
-    <input type="text" id="post-message">
-    <button id="send">Send</button>
-    <div id="result"></div>
-    <h1>Facebook Feed</h1>
-    <div id="facebook-feed"></div>
-    <h1>Twitter Feed</h1>
-    <div id="twitter-feed"></div>
-  </body>                                                                 
+    <!--
+      This code below is our JavaScript template for every
+      single item we'll display on our feed. It is processed
+      by icanhaz.js.
+    -->
+    <script id="item" type="text/html">
+      <li class="item">
+        <article class="{{network}}">
+          <div class="avatar" style="background-image: url('{{user.avatar}}')"></div>
+          <div class="content_wrapper">
+            <header>
+              <a class="user" href="{{user.url}}" rel="external">
+                <span>{{user.name}}</span>:
+              </a>
+            </header>
+
+            <div class="content">
+              {{message.text}}
+            </div>
+          </div>
+
+          <footer>
+            <a href="{{message.permalink}}">Posted on {{message.datetime}}</a>
+          </footer>
+        </article>
+      </li>
+    </script>
+
+    <!--
+      Adding Scripts. Addin jQuery from Google CDN
+      and icanhaz.js from Github for faster loading,
+      while all our custom scripts are stored in js/app.js
+    -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//github.com/andyet/ICanHaz.js/raw/master/ICanHaz.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
 </html>
