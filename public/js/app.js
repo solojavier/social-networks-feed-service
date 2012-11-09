@@ -28,9 +28,8 @@ SocialFeed.prototype.loadJSON = function(options) {
         /* Set a maximum ammount of tries to make before throwing an error */
         retryLimit: 3,
 
-        /* If we get a hold of the JSON data, we call SocialFeed.loadItem */
+        /* If we get a hold of the JSON data, we call SocialFeed.parseItems */
         success: function(data) {
-            console.log(data);
             that.parseItems(data, options);
         },
 
