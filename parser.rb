@@ -8,15 +8,16 @@ class Parser
     FACEBOOK_USER = 'http://www.facebook.com/RubyGdl' 
     
     USER_AVATAR   = 'http://icons.iconarchive.com/icons/danleech/simple/512/github-icon.png'
+    DATETIME      = 'November 8th, 2012 10:32am'
 
     def create_facebook_item(data)
-      message = create_message(data["message"], FACEBOOK_LINK)
+      message = create_message(data["message"], FACEBOOK_LINK, DATETIME)
       user    = create_user(data["from"]["name"], FACEBOOK_USER, USER_AVATAR)
       create_item(message, user, 'facebook')
     end
 
     def create_twitter_item(tweet)
-      message = create_message(tweet.text, TWITTER_LINK)
+      message = create_message(tweet.text, TWITTER_LINK, DATETIME)
       user    = create_user(tweet.user.name, TWITTER_USER, USER_AVATAR)
       create_item(message, user, 'twitter')
     end
@@ -27,8 +28,8 @@ class Parser
       {message: message, user: user, network: network}
     end
 
-    def create_message(text, permalink)
-      {text: text, permalink: permalink}
+    def create_message(text, permalink, datetime)
+      {text: text, permalink: permalink, datetime: datetime}
     end
 
     def create_user(name, url, avatar)
