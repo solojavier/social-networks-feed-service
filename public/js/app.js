@@ -160,13 +160,15 @@ SocialFeedView.prototype.postStatus = function(e) {
 
 /* Post prepend Function */
 SocialFeedView.prototype.prependItem = function(data) {
+    /* Prepend data to the list and remove loading class if it exists */
     $('#news_list').prepend(data);
     $('#network_feed').removeClass('loading');
 };
 
 /* Clear input Function */
 SocialFeedView.prototype.clearInput = function() {
-    $('#message').val('');
+    /* Clearing input value */
+    $('#message').val('').css('height', '2em');
 };
 
 /**
