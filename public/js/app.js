@@ -101,7 +101,7 @@ SocialFeed.prototype.post = function(options) {
         retryLimit: 3,
 
         /* The data we're posting */
-        data: { message: options.text },
+        data: { message: options.message },
 
         /* If the message was posted, do this */
         success: options.success,
