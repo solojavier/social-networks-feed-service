@@ -28,6 +28,22 @@ SocialFeed.prototype.loadJSON = function(options) {
         /* Set a maximum ammount of tries to make before throwing an error */
         retryLimit: 3,
 
+        /* Beforesend function for visual purposes */
+        beforeSend: function() {
+
+            /* Fading list out for 400 milliseconds */
+            $('#news_list').fadeOut(400, function() {
+                /* Removing any items already implemented */
+                $('#news_list').find('li').remove();
+
+                /* Displaying the list again */
+                $('#news_list').show();
+
+                /* Adding loading class */
+                $('#network_feed').addClass('loading');
+            });
+        },
+
         /* If we get a hold of the JSON data, we call SocialFeed.parseItems */
         success: function(data) {
             that.parseItems(data, options);
@@ -43,7 +59,7 @@ SocialFeed.prototype.loadJSON = function(options) {
                 $.ajax(this);
                 return;
             } else {
-                alert("There was an error loading the JSON data. Error thrown was: " + XMLHttpRequest);
+                alert("There was an error loading the JSON data. Error thrown was: " + XMLHttpRequest.statusText);
             }
         }
     });
@@ -116,7 +132,7 @@ SocialFeed.prototype.post = function(options) {
                 $.ajax(this);
                 return;
             } else {
-                alert("There was an error posting your message. Error thrown was: " + XMLHttpRequest);
+                alert("There was an error posting your message. Error thrown was: " + XMLHttpRequest.statusText);
             }
         }
     });
@@ -151,7 +167,8 @@ SocialFeedView.prototype.postStatus = function(e) {
     this.items.post({
         message: $('#message').val(),
         success: function(data) {
-            that.prependItem([data]);
+            alert('Message posted!');
+            that.items.loadJSON(that);
             that.clearInput();
         }
     });
