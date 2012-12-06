@@ -41,7 +41,7 @@ Go to [http://localhost:4567](http://localhost:4567) and have fun
 
 If you want to improve your skills and learn more about Ruby, implement one of the following missing features
 
-* Remove hardcoded values in Parser class (TWITTER_LINK, TWITTER_USER, USER_AVATAR...)
+* Remove hardcoded values in Parser class (TWITTER_LINK, TWITTER_USER, USER_AVATAR...) by obtaining the values from data response from social networks
 * Add logic so you can select in which social network you want to post a message
 * Implement a service to configure authentication programatically
 * Order posts by date (when mixed both streams)
